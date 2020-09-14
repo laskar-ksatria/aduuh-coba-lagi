@@ -12,6 +12,7 @@ Router.get('/setcookie', (req,res,next) => {
 })
 Router.get('/getcookie', (req,res,next) => {
     let token = req.cookies.servertoken;
+    console.log(token);
     res.status(200).json({token})
 })
 
