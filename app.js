@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const https = require('https');
+const http = require('http');
 const path = require('path');
 const fs = require('fs');
 
@@ -21,7 +22,7 @@ const options = {
     cert: fs.readFileSync(path.join(__dirname, 'cert', 'abels-cert.pem'))
 };
 
-https.createServer(app).listen(PORT, () => {
+http.createServer(app).listen(PORT, () => {
     console.log('Server running')
 })
 
