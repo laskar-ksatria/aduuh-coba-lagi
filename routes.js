@@ -7,7 +7,7 @@ Router.get('/', (req,res,next) => {
 
 Router.get('/setcookie', (req,res,next) => {
     let token = 'owlking'
-    res.cookie('servertoken', token);
+    res.cookie('servertoken', token, {sameSite: 'none', secure: true, httpOnly: true});
     res.status(200).json({message: "Cookie has been set"})
 })
 Router.get('/getcookie', (req,res,next) => {
