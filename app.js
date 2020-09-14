@@ -21,8 +21,10 @@ const options = {
     cert: fs.readFileSync(path.join(__dirname, 'cert', 'abels-cert.pem'))
 };
 
+https.createServer(app).listen(PORT, () => {
+    console.log('Server running')
+})
 
-
-https.createServer(options, app).listen(PORT, () => {
-    console.log(`HTTPS listening on ${PORT}`);
-});
+// https.createServer(options, app).listen(PORT, () => {
+//     console.log(`HTTPS listening on ${PORT}`);
+// });
