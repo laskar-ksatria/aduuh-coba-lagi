@@ -1,6 +1,10 @@
 const express = require('express');
 const Router = express.Router();
 
+Router.get('/', (req,res,next) => {
+    res.send("We connected to HTTPS")
+})
+
 Router.get('/setcookie', (req,res,next) => {
     let token = 'owlking'
     res.cookie('servertoken', token);
