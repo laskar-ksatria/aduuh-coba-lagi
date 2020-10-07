@@ -22,12 +22,13 @@ Router.get('/clearcookie', (req,res,next) => {
 });
 
 Router.get('/http-socket', (req,res,next) => {
-    let http_Io = req.http_Io;
+    let http_Io = req.httpIo;
     http_Io.emit(`http-test`, "Hallo from server http");
     res.status(200).json({message: "Hallo"})
 })
 
 Router.get('/https-socket', (req,res,next) => {
+    let https_Io =req.httpsIo
     https_Io.emit(`https-test`, "Hallo from server https");
     res.status(200).json({message: "Hallo"})
 

@@ -23,32 +23,35 @@ const options = {
     cert: fs.readFileSync(path.join(__dirname, 'cert', 'laskar-cert.pem'))
 };
 
-const http_Io = Socket(http.createServer(app));
-const https_Io = Socket(https.createServer(options, app));
+const httpServer = http.createServer(app);
+const httpsServer = http.createServer(options, app);
+
+const httpIo = Socket(httpServer);
+const httpsIo = Socket(httpsServer);
 
 app.use((req,res,next) => {
-    req.http_Io = http_Io;
-    req.https_Io = https_Io;
+    req.httpIo = httpIo;
+    req.httpsIo = httpsIo;
     next();
 });
 
 //main route
 app.use(require('./routes'));
 
-http.createServer(app).listen(HTTP_PORT, () => {
+httpServer.listen(HTTP_PORT, () => {
     console.log("HTTP listening on " + HTTP_PORT)
 });
 
-https.createServer(options, app).listen(HTTPS_PORT, () => {
+httpsServer.listen(HTTPS_PORT, () => {
     console.log(`HTTPS listening on ${HTTPS_PORT}`);
 });
 
-http_Io.on('connection', socket => {
+httpIo.on('connection', socket => {
     console.log("http Io connected");
     socket.on('disconnect', () => console.log("http Io disconnect"))
 })
 
-https_Io.on('connection', socket => {
+httpsIo.on('connection', socket => {
     console.log("https Io connected");
     socket.on('disconnect', () => console.log("https Io disconnect"))
 })
