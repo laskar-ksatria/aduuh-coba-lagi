@@ -42,3 +42,13 @@ http.createServer(app).listen(HTTP_PORT, () => {
 https.createServer(options, app).listen(HTTPS_PORT, () => {
     console.log(`HTTPS listening on ${HTTPS_PORT}`);
 });
+
+http_Io.on('connection', socket => {
+    console.log("http Io connected");
+    socket.on('disconnect', () => console.log("http Io disconnect"))
+})
+
+https_Io.on('connection', socket => {
+    console.log("https Io connected");
+    socket.on('disconnect', () => console.log("https Io disconnect"))
+})
